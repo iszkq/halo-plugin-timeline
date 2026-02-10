@@ -65,6 +65,14 @@ const displayDescription = computed(() => {
     if (props.timeline.spec?.displayName && props.timeline.spec?.date) {
         parts.push(props.timeline.spec.date);
     }
+    // 展示内容摘要（带省略号）
+    if (props.timeline.spec?.content) {
+        const raw = props.timeline.spec.content.trim();
+        if (raw) {
+            const preview = raw.length > 40 ? raw.slice(0, 40) + "…" : raw;
+            parts.push(preview);
+        }
+    }
     if (props.timeline.spec?.relatedLinks) {
         parts.push(`关联文章: ${props.timeline.spec.relatedLinks}`);
     }

@@ -161,8 +161,8 @@ watch(Meta_Enter, (v) => {
                     <FormKit
                         name="date"
                         label="时间"
-                        type="text"
-                        help="支持填写年份（例如：2026）、年月（例如：2026-02）或完整日期（例如：2026-02-10）"
+                        type="date"
+                        help="请选择一个大致日期（例如：2026-02-10），在展示和排序时可以理解为某年/某月/某日的近似时间"
                         validation="required"
                     ></FormKit>
                     <FormKit name="displayName" label="标题" type="textarea" validation="required"></FormKit>

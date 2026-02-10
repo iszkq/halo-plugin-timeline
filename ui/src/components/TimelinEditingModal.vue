@@ -147,7 +147,13 @@ watch(Meta_Enter, (v) => {
 // 当用户通过日历选择完整日期时，将结果同步到上方“时间”输入框中
 watch(datePickerValue, (val) => {
     if (val) {
-        formState.value.spec.date = val;
+        // 浏览器日期格式可能为 "2026 / 02 / 04"，这里统一规范为 "2026-02-04"
+        const normalized = val.replace(/\s*/g, "").replace(/\//g, "-");
+        if (/^\d{4}-\d{2}-\d{2}$/.test(normalized)) {
+            formState.value.spec.date = normalized;
+        } else {
+            formState.value.spec.date = val;
+        }
     }
 });
 </script>
@@ -178,7 +184,7 @@ watch(datePickerValue, (val) => {
                         label="时间"
                         type="text"
                         help="请输入年份（如：2026）、年月（如：2026-02）或完整日期（如：2026-02-10），用于大致标记时间"
-                        validation="required|matches:/^\\d{4}(-\\d{2}){0,2}$/"
+                        validation="required|matches:/^\d{4}(-\d{2}){0,2}$/"
                         :validation-messages="{
                             required: '时间为必填项',
                             matches: '时间格式只支持：YYYY、YYYY-MM 或 YYYY-MM-DD',

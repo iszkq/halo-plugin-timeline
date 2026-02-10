@@ -183,11 +183,10 @@ watch(datePickerValue, (val) => {
                         name="date"
                         label="时间"
                         type="text"
-                        help="请输入年份（如：2026）、年月（如：2026-02）或完整日期（如：2026-02-10），用于大致标记时间"
-                        validation="required|matches:/^\d{4}(-\d{2}){0,2}$/"
+                        help="请输入年份（如：2026）、年月（如：2026-02）或完整日期（如：2026-02-10），用于大致标记时间（仅校验非空，不做格式强校验）"
+                        validation="required"
                         :validation-messages="{
                             required: '时间为必填项',
-                            matches: '时间格式只支持：YYYY、YYYY-MM 或 YYYY-MM-DD',
                         }"
                     ></FormKit>
                     <!-- 辅助日期选择器：保留日历组件，选择完整日期后自动填充到上方“时间”输入框 -->

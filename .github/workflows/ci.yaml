@@ -26,6 +26,13 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      # 先构建 timeline 前端组件，生成并复制最新的 timeline.umd.js
+      - name: Build timeline frontend (packages)
+        working-directory: packages
+        run: |
+          pnpm install
+          pnpm run build
+
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:

@@ -154,7 +154,7 @@ function onGroupEditingModalClose() {
 }
 </script>
 <template>
-    <GroupEditingModal v-if="groupEditingModal" :group="updateGroup" @close="onGroupEditingModalClose" />
+    <GroupEditingModal v-if="groupEditingModal" :group="(updateGroup as any)" @close="onGroupEditingModalClose" />
         <VCard :body-class="[':uno: !p-0']" title="分组">
         <VLoading v-if="isLoading" />
         <Transition v-else-if="!groups || !groups.length" appear name="fade">

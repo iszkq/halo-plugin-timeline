@@ -2,13 +2,8 @@
 
 ## 简介
 
-为 Halo2 提供时间轴组件、横向/竖向布局，可在编辑器中灵活插入，自动适配深色主题
+为 Halo2 提供时间轴组件、横向/竖向布局，可在编辑器中灵活插入，自动适配深色主题。
 
-## 🌐 演示与交流
-
-- **演示站点1**：[https://www.xhhao.com/](https://www.xhhao.com/)
-- **文档**：[https://docs.lik.cc/](https://docs.lik.cc/)
-- **QQ 交流群**：[![QQ群](https://www.xhhao.com/upload/iShot_2025-03-03_16.03.00.png)](https://www.xhhao.com/upload/iShot_2025-03-03_16.03.00.png)
 
 ## 开发环境
 
@@ -37,4 +32,9 @@ pnpm dev
 
 ## 许可证
 
-[GPL-3.0](./LICENSE) © Handsome 
+[GPL-3.0](./LICENSE) © 恪勤
+
+## 致敬
+
+本项目在原有开源时间轴插件的基础上进行修改与二次开发，  
+**原作者：Handsome**，在此致以诚挚的感谢与致敬。

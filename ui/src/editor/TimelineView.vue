@@ -67,30 +67,7 @@ const timelineComponent = computed(() => {
         </div>
       </div>
       <div class="timeline-view-nav-end :uno: flex flex-wrap items-center gap-3">
-        <FormKit
-          v-model="title"
-          type="text"
-          name="title"
-          placeholder="时间轴标题（可选）"
-          :classes="{
-            wrapper: 'timeline-title-input-wrapper',
-            input: 'timeline-title-input',
-          }"
-        />
-        <FormKit
-          v-model="fontSize"
-          type="select"
-          name="fontSize"
-          :options="[
-            { label: '小', value: 'small' },
-            { label: '中', value: 'medium' },
-            { label: '大', value: 'large' },
-          ]"
-          :classes="{
-            wrapper: 'timeline-font-size-wrapper',
-            input: 'timeline-font-size-input',
-          }"
-        />
+        <!-- 分组优先，放在最左边 -->
         <FormKit
           v-model="groupName"
           type="select"
@@ -112,6 +89,32 @@ const timelineComponent = computed(() => {
           :classes="{
             wrapper: 'timeline-group-select-wrapper',
             input: 'timeline-group-select-input',
+          }"
+        />
+        <!-- 中间是时间轴标题 -->
+        <FormKit
+          v-model="title"
+          type="text"
+          name="title"
+          placeholder="时间轴标题（可选）"
+          :classes="{
+            wrapper: 'timeline-title-input-wrapper',
+            input: 'timeline-title-input',
+          }"
+        />
+        <!-- 右侧是字号选择 -->
+        <FormKit
+          v-model="fontSize"
+          type="select"
+          name="fontSize"
+          :options="[
+            { label: '小', value: 'small' },
+            { label: '中', value: 'medium' },
+            { label: '大', value: 'large' },
+          ]"
+          :classes="{
+            wrapper: 'timeline-font-size-wrapper',
+            input: 'timeline-font-size-input',
           }"
         />
       </div>

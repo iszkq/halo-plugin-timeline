@@ -9,12 +9,12 @@ spec:
   enabled: true
   requires: ">=2.22.0"
   author:
-    name: 恪勤
-    website: /
+    name: Handsome
+    website: https://www.xhhao.com
   logo: logo.svg
-  homepage: /
-  repo: https://github.com/iszkq/halo-plugin-timeline
-  issues: https://github.com/iszkq/halo-plugin-timeline/issues
+  homepage: https://www.xhhao.com
+  repo: https://github.com/acanyo/timeline
+  issues: https://github.com/acanyo/timeline/issues
   displayName: "时间轴"
   description: "为 Halo2 提供时间轴组件、横向/竖向/交替布局，可在编辑器中灵活插入"
   license:

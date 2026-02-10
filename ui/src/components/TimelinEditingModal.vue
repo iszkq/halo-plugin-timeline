@@ -44,6 +44,8 @@ const initialFormState: Timeline = {
 const formState = ref<Timeline>(cloneDeep(initialFormState));
 const customUrl = ref("");
 const articleValue = ref<string | undefined>(undefined);
+// 辅助日期选择器的值：用于保留日历组件，同时把选择结果同步到上方“模糊日期”输入框
+const datePickerValue = ref<string | undefined>(undefined);
 const isSubmitting = ref(false);
 const modal = useTemplateRef<InstanceType<typeof VModal> | null>("modal");
 
@@ -116,6 +118,12 @@ onMounted(() => {
             articleValue.value = undefined;
             customUrl.value = "";
         }
+
+        // 如果已保存的时间是完整日期（YYYY-MM-DD），同步到日期选择器中，方便编辑
+        const existingDate = props.timeline.spec?.date;
+        if (existingDate && /^\d{4}-\d{2}-\d{2}$/.test(existingDate)) {
+            datePickerValue.value = existingDate;
+        }
     } else {
         articleValue.value = undefined;
         customUrl.value = "";
@@ -133,6 +141,13 @@ watch(ControlLeft_Enter, (v) => {
 watch(Meta_Enter, (v) => {
     if (v && isMac) {
         submitForm("timeline-form");
+    }
+});
+
+// 当用户通过日历选择完整日期时，将结果同步到上方“时间”输入框中
+watch(datePickerValue, (val) => {
+    if (val) {
+        formState.value.spec.date = val;
     }
 });
 </script>
@@ -161,9 +176,21 @@ watch(Meta_Enter, (v) => {
                     <FormKit
                         name="date"
                         label="时间"
-                        type="date"
-                        help="请选择一个大致日期（例如：2026-02-10），在展示和排序时可以理解为某年/某月/某日的近似时间"
-                        validation="required"
+                        type="text"
+                        help="请输入年份（如：2026）、年月（如：2026-02）或完整日期（如：2026-02-10），用于大致标记时间"
+                        validation="required|matches:/^\\d{4}(-\\d{2}){0,2}$/"
+                        :validation-messages="{
+                            required: '时间为必填项',
+                            matches: '时间格式只支持：YYYY、YYYY-MM 或 YYYY-MM-DD',
+                        }"
+                    ></FormKit>
+                    <!-- 辅助日期选择器：保留日历组件，选择完整日期后自动填充到上方“时间”输入框 -->
+                    <FormKit
+                            v-model="datePickerValue"
+                            type="date"
+                            name="datePicker"
+                            label="日期选择器（可选）"
+                            help="点击选择完整日期，会自动填入上方时间输入框，你也可以手动修改为仅年或年月"
                     ></FormKit>
                     <FormKit name="displayName" label="标题" type="textarea" validation="required"></FormKit>
                     <FormKit name="content" label="内容" type="textarea" help="该条时间轴的详细描述（可选）"></FormKit>

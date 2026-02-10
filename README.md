@@ -38,11 +38,6 @@
   - 使用统一的 API 拉取时间轴数据，自动按时间进行排序和分组。
   - 组件样式可通过自定义 CSS 变量进行主题定制，方便与博客整体风格统一。
 
-## 🌐 演示与交流
-
-- **演示站点1**：[https://www.xhhao.com/](https://www.xhhao.com/)
-- **文档**：[https://docs.lik.cc/](https://docs.lik.cc/)
-- **QQ 交流群**：[![QQ群](https://www.xhhao.com/upload/iShot_2025-03-03_16.03.00.png)](https://www.xhhao.com/upload/iShot_2025-03-03_16.03.00.png)
 
 ## 开发环境
 

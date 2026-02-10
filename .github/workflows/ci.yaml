@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 安装 Node.js（供 ui 子项目和 pnpm 使用）
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # 安装 pnpm，解决 :ui:pnpmInstall 找不到 pnpm 命令的问题
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      # 关键：给 gradlew 加执行权限，避免 Permission denied
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      # 使用 Gradle 构建插件（会带上 ui 子项目的构建）
+      - name: Build with Gradle
+        run: ./gradlew clean build --no-daemon
+
+      # 新增：把构建好的插件 jar 作为构建产物上传，方便在 Actions 页面下载
+      - name: Upload plugin jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-jar
+          path: build/libs/*.jar
